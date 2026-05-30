@@ -192,13 +192,16 @@ setRecommendations(data.recommendations || []);
   Upload Resume
   <input
     type="file"
-    accept=".txt,.docx,.pdf"
+    accept=".txt,.docx"
     onChange={(e) => {
       const file = e.target.files?.[0];
       if (file) setResumeFile(file);
     }}
     className="hidden"
   />
+  <p className="text-yellow-400 text-sm mt-2">
+  Currently supported: DOCX and TXT files. PDF support coming soon.
+</p>
 </label>
 
 <textarea

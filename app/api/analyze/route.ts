@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import mammoth from "mammoth";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
-
 const skills = [
 "java",
 "python",
@@ -50,6 +49,7 @@ if (
   resumeText = result.value;
 }
 
+// PDF
 // PDF
 else if (file.type === "application/pdf") {
   const loadingTask = pdfjsLib.getDocument({
