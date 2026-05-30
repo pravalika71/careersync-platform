@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import mammoth from "mammoth";
-import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 const skills = [
 "java",
 "python",
@@ -52,36 +51,14 @@ if (
 // PDF
 // PDF
 else if (file.type === "application/pdf") {
-  const loadingTask = pdfjsLib.getDocument({
-    data: new Uint8Array(buffer),
-  });
-
-  const pdf = await loadingTask.promise;
-
-  let text = "";
-
-  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-    const page = await pdf.getPage(pageNum);
-
-    const content = await page.getTextContent();
-
-    const pageText = content.items
-      .map((item: any) =>
-        "str" in item ? item.str : ""
-      )
-      .join(" ");
-
-    text += pageText + "\n";
-  }
-
-  resumeText = text;
+  return NextResponse.json(
+    {
+      error: "PDF uploads are temporarily unavailable. Please upload a DOCX file.",
+    },
+    { status: 400 }
+  );
 }
-
-// TXT
-else {
-  resumeText = await file.text();
-}
-
+ 
 const lowerText = resumeText.toLowerCase();
 const lowerJD = jobDescription.toLowerCase();
 
